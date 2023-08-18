@@ -16,7 +16,7 @@ func findGoFiles(path string, d fs.DirEntry, err error) error {
 	}
 
 	// Skip this file if not Go source code
-	if d.IsDir() || !strings.HasSuffix(d.Name(), ".go") {
+	if d.IsDir() || !strings.HasSuffix(d.Name(), ".go") || strings.HasSuffix(d.Name(), "test.go") {
 		return nil
 	}
 
