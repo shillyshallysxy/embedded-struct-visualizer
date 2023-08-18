@@ -15,8 +15,15 @@ func findGoFiles(path string, d fs.DirEntry, err error) error {
 		return err
 	}
 
+	if strings.Contains(path, "conf") ||
+		strings.Contains(path, "test") {
+		log(fmt.Sprintf("skip: %v", path))
+		return nil
+	}
 	// Skip this file if not Go source code
-	if d.IsDir() || !strings.HasSuffix(d.Name(), ".go") || strings.HasSuffix(d.Name(), "test.go") {
+	if d.IsDir() ||
+		!strings.HasSuffix(d.Name(), ".go") ||
+		strings.HasSuffix(d.Name(), "test.go") {
 		return nil
 	}
 
